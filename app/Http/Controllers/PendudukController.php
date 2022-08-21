@@ -168,7 +168,10 @@ class PendudukController extends Controller
     public function destroy($id)
     {
         $penduduk = Penduduk::where('id', $id)->first();
-        Storage::delete($penduduk->image);
+        if ($penduduk->image != null) {
+            Storage::delete($penduduk->image);
+        }
+        $penduduk->vaksin()->delete();
         $penduduk->delete();
 
         return redirect('admin/penduduk/tetap')->with('message', '<div class="alert alert-success">Delete berhasil!</div>');

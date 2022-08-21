@@ -12,4 +12,9 @@ class Penduduk extends Model
     protected $table = 'tb_penduduk';
 
     protected $guarded = [''];
+
+    public function vaksin()
+    {
+        return $this->hasOne(Vaksin::class, 'id_penduduk', 'id');
+    }
 }
